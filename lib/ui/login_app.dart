@@ -11,7 +11,18 @@ class Login extends StatefulWidget {
 class LoginState extends State<Login> {
   final TextEditingController _userController = new TextEditingController();
   final TextEditingController _passwordController = new TextEditingController();
-
+  void _erase(){
+      setState(() {
+        _userController.clear();
+        _passwordController.clear();
+      });
+  }
+  void _showMe(){
+    setState(() {
+        _userController.text;
+        
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -24,7 +35,7 @@ class LoginState extends State<Login> {
       backgroundColor: Colors.blueGrey,
       body: new Container(
         alignment: Alignment.topCenter,
-        child: new Column(
+        child: new ListView(
           children: <Widget>[
             new Image.asset('images/097 face.png',
                 width: 90.0, height: 90.0, color: Colors.lightBlue),
@@ -43,7 +54,7 @@ class LoginState extends State<Login> {
                   new TextField(
                     controller: _passwordController,
                     decoration: new InputDecoration(
-                        hintText: 'Password', icon: new Icon(Icons.lock)),
+                        hintText: 'Password', icon: new Icon(Icons.lock)),obscureText: true,
                   ),
                 new Padding(padding : new EdgeInsets.all(10.0)),
                   new Center(
@@ -53,7 +64,7 @@ class LoginState extends State<Login> {
                           new Container(
                             margin: EdgeInsets.only(left : 38.0),
                             child: new RaisedButton(
-                              onPressed: ()=>debugPrint("Login"),
+                              onPressed: _showMe,
                               color: Colors.redAccent,
                               child : new Text("Login", style: new TextStyle(color: Colors.white,fontSize: 17.0),)
                             ),
@@ -62,7 +73,7 @@ class LoginState extends State<Login> {
                             new Container(
                             margin: EdgeInsets.only(left : 150.0),
                             child: new RaisedButton(
-                              onPressed: ()=>debugPrint("Login"),
+                              onPressed: _erase,
                               color: Colors.redAccent,
                               child : new Text("Reset", style: new TextStyle(color: Colors.white,fontSize: 17.0),)
                             ),
@@ -79,7 +90,7 @@ class LoginState extends State<Login> {
               children: <Widget>[
                Padding(
                  padding: const EdgeInsets.all(20.0),
-                 child: new Text("Welcome Adil",style: new TextStyle(fontSize: 30.0,color: Colors.white),),
+                 child: new Text(_userController.text,style: new TextStyle(fontSize: 30.0,color: Colors.white),),
                )
               ],
             )
